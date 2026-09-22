@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Us | </title>
+<link rel="stylesheet" href="/styles.css">
+<script src="/analytics.js"></script>
+<script>
+if (location.protocol !== 'https:') {
+  location.replace(`https://${location.host}${location.pathname}${location.search}`);
+}
+</script>
+<link rel="icon" href="/assets/three-brothers-logo.webp">
+
+</head>
+
+<body>
+
+<header class="top-nav">
+  <div class="container nav-inner">
+    <a href="/">
+      <img src="/assets/three-brothers-logo.webp" class="logo" alt="Three Brothers Realty">
+    </a>
+    <div class="nav-right">
+      <a href="tel:7276187152" class="phone">(727) 618-7152</a>
+      <a href="/get-offer/" class="btn-primary">Get Offer!</a>
+      <div class="hamburger" onclick="openMenu()">☰</div>
+    </div>
+  </div>
+</header>
+
+<div id="sideMenu" class="side-menu">
+  <div class="side-menu-inner">
+    <div class="close-btn" onclick="closeMenu()">✕</div>
+    <a href="/">Home</a>
+    <a href="/get-offer/">Get Offer</a>
+    <a href="/about/">About Us</a>
+  </div>
+</div>
+
+<div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div>
+
+
+<!-- =========================
+ABOUT HERO — MATCHES SCREENSHOT
+========================= -->
+<section class="about-hero">
+  <div class="overlay"></div>
+  <div class="container center">
+    <h1>ABOUT US</h1>
+  </div>
+</section>
+
+
+<!-- =========================
+MAIN CONTENT — MATCHES SUMMIT STRUCTURE
+========================= -->
+<section class="section">
+  <div class="container about-wrapper">
+
+    <!-- LEFT -->
+    <div class="about-main">
+
+      <h2>About Three Brothers Realty</h2>
+
+      <h3>Who Are We?</h3>
+
+      <p>
+        We buy houses. In as little as one phone call, you can receive a quick cash offer from us. We aren’t real estate agents, we are cash home buyers. It’s a common misconception that we are the same, but that’s not the case. The goal of a cash home buyer is to offer homeowners a fair price for their home in a quick and hassle-free manner.
+      </p>
+
+      <p>
+        We are able to accomplish this through an efficient, streamlined home-selling process. In just three easy steps, you can enjoy more money, less hassle, and accomplish your goals in less time.
+      </p>
+
+      <h3>Cash Home Buyers Nationwide!</h3>
+
+      <p>
+        As a cash home buyer, we are dedicated to helping homeowners who need to sell their houses fast and hassle-free. We understand that selling a house can be a stressful and time-consuming process, which is why we’re prepared to offer you a fast and fair solution. Whether you’re facing foreclosure, divorce, or simply need to sell your house quickly for any reason, we’re here to help.
+      </p>
+
+      <p>
+        When you work with us, you don’t need to worry about the usual hassles of selling a house. We don’t require any repairs, staging, or cleaning, which can save you time and money. We also offer a fair cash offer for your home, and together we can close the sale in as little as seven days, giving you the cash you need to move on with your life.
+      </p>
+
+      <p>
+        We are experienced cash home buyers and have helped many families sell their homes quickly and efficiently. We pride ourselves on providing clients with a stress-free and transparent process, and will work with you every step of the way to ensure that you’re completely satisfied with the sale.
+      </p>
+
+      <h3>Why We Are The Best Home Buyer In The Nation</h3>
+
+      <p>
+        It’s simple: we are able to offer a better price for each homeowner we work with. It all starts with a single phone call. You call our office, give your contact information, and we will arrange a convenient time to meet. We will evaluate your home and make you an offer within 24 hours. You can then close at your earliest convenience. If you want to sell your house within one week, we can do that. Or, if you want to take your time, we will work with your schedule.
+      </p>
+
+    </div>
+
+
+    <!-- RIGHT SIDEBAR — MATCH INDEX BEHAVIOR -->
+    <div class="about-sidebar">
+      <div class="offer-card">
+
+        <h3>Get An Offer!</h3>
+
+        <form id="addressForm" class="floating-offer-form">
+          <input 
+            id="autocomplete"
+            type="text"
+            placeholder="Home Address Here..."
+            required
+          />
+          <button id="offerBtn" type="submit">Get Offer!</button>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+ <!-- footer -->
+<footer class="footer">
+  <div class="container footer-grid">
+
+    <div>
+      <a href="#top">
+        <img src="/assets/three-brothers-logo.webp" class="footer-logo" alt="Three Brothers Realty">
+      </a>
+
+    </div>
+
+    <div>
+      <h4>Legal</h4>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Use</a>
+    </div>
+
+    <div>
+      <h4>Contact Us</h4>
+      <a href="tel:7276187152">(727) 618-7152</a>
+      <a href="mailto:info@threebrothersrealty.com">
+        info@threebrothersrealty.com
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © <span id="year"></span> Three Brothers Realty. All Rights Reserved.
+  </div>
+</footer>
+
+
+<!-- SAME AS INDEX -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj6XJI1xljjB84anf_s7GMsBqs_03HwdE&libraries=places&callback=initAutocomplete" async defer></script>
+<script src="/script.js"></script>
+
+</body>
+</html>

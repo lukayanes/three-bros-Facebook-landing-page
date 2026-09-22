@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Offer | Three Brothers Realty</title>
+<link rel="stylesheet" href="/styles.css">
+<script src="/analytics.js"></script>
+<link rel="icon" href="/assets/three-brothers-logo.webp">
+
+<script>
+if (location.protocol !== 'https:') {
+  location.replace(`https://${location.host}${location.pathname}${location.search}`);
+}
+</script>
+
+</head>
+
+<body>
+
+<header class="top-nav">
+  <div class="container nav-inner">
+    <a href="/">
+      <img src="/assets/three-brothers-logo.webp" class="logo" alt="Three Brothers Realty">
+    </a>
+
+    <div class="nav-right">
+      <a href="tel:7276187152" class="phone">(727) 618-7152</a>
+      <a href="/get-offer/" class="btn-primary">Get Offer!</a>
+      <div class="hamburger" onclick="openMenu()">☰</div>
+    </div>
+  </div>
+</header>
+
+<div id="sideMenu" class="side-menu">
+  <div class="side-menu-inner">
+    <div class="close-btn" onclick="closeMenu()">✕</div>
+    <a href="/">Home</a>
+    <a href="/get-offer/">Get Offer</a>
+    <a href="/about/">About Us</a>
+  </div>
+</div>
+
+<div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div>
+
+<section class="hero" id="top">
+  <div class="overlay"></div>
+
+  <div class="container hero-inner">
+    <h4>No Repairs, No Showings, No Cleaning, No Stress</h4>
+
+    <h1>
+      LET'S GET <span class="gold">STARTED</span>
+    </h1>
+
+    <div class="floating-offer" id="floatingOffer">
+      <form id="addressForm" class="floating-offer-form">
+        <input
+          id="autocomplete"
+          name="address"
+          type="text"
+          placeholder="Home Address Here..."
+          autocomplete="street-address"
+          required
+        />
+        <button id="offerBtn" type="submit">Get Offer!</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section light">
+  <div class="container center">
+    <h2>How It Works</h2>
+    <p>Our Simple 3 Step Process</p>
+
+    <div class="steps">
+      <div class="step-card">
+        <h3>01</h3>
+        <img src="/assets/onlineform.jpg" alt="Fill out form">
+        <h4>Fill Out the Online Form</h4>
+        <p>One of our specialists will call you.</p>
+      </div>
+
+      <div class="step-card">
+        <h3>02</h3>
+        <img src="/assets/closingdate.jpg" alt="Pick closing date">
+        <h4>Pick Your Closing Date</h4>
+        <p>No financing fall-through risk.</p>
+      </div>
+
+      <div class="step-card">
+        <h3>03</h3>
+        <img src="/assets/getpaid.jpg" alt="Get paid">
+        <h4>Get Paid and Move On</h4>
+        <p>We pay cash and close fast.</p>
+      </div>
+    </div>
+
+    <a href="tel:7276187152" class="phone-pill">(727) 618-7152</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="#top">
+        <img src="/assets/three-brothers-logo.webp" class="footer-logo" alt="Three Brothers Realty">
+      </a>
+    </div>
+
+    <div>
+      <h4>Legal</h4>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Use</a>
+    </div>
+
+    <div>
+      <h4>Contact Us</h4>
+      <a href="tel:7276187152">(727) 618-7152</a>
+      <a href="mailto:info@threebrothersrealty.com">info@threebrothersrealty.com</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © <span id="year"></span> Three Brothers Realty. All Rights Reserved.
+  </div>
+</footer>
+
+<script src="/script.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc9X80v6obtTTfNm8GGVd7puMFjcwCdjw&libraries=places&callback=initAutocomplete" async defer></script>
+
+</body>
+</html>

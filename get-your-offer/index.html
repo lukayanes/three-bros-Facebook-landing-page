@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complete Your Offer | Three Brothers Realty</title>
+<link rel="stylesheet" href="/styles.css">
+<script src="/analytics.js"></script>
+<link rel="icon" href="/assets/three-brothers-logo.webp">
+</head>
+
+<body>
+
+<header class="top-nav">
+  <div class="container nav-inner">
+    <a href="/">
+      <img src="/assets/three-brothers-logo.webp" class="logo" alt="Three Brothers Realty">
+    </a>
+
+    <div class="nav-right">
+      <a href="tel:7276187152" class="phone">(727) 618-7152</a>
+      <a href="/get-offer/" class="btn-primary">Get Offer!</a>
+      <div class="hamburger" onclick="openMenu()">☰</div>
+    </div>
+  </div>
+</header>
+
+<div id="sideMenu" class="side-menu">
+  <div class="side-menu-inner">
+    <div class="close-btn" onclick="closeMenu()">✕</div>
+    <a href="/">Home</a>
+    <a href="/get-offer/">Get Offer</a>
+    <a href="/about/">About-Us</a>
+  </div>
+</div>
+
+<div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div>
+
+<section class="offer-step-section">
+  <div class="offer-step-wrap compact-offer-wrap">
+
+    <h1 class="offer-step-title">Almost there!</h1>
+    <p class="offer-step-subtitle">
+      Where should we send your offer for
+      <span id="displayAddress" class="address-inline"></span>?
+    </p>
+
+    <form id="contactForm" class="offer-contact-form compact-offer-form">
+      <input type="hidden" id="addressField" name="address">
+      <input type="hidden" id="cityField" name="city">
+      <input type="hidden" id="stateField" name="state">
+      <input type="hidden" id="postalField" name="postal">
+      <input type="hidden" id="countryField" name="country">
+
+      <div class="offer-two-col compact-two-col">
+        <input id="firstName" name="first_name" type="text" placeholder="First Name" required>
+        <input id="lastName" name="last_name" type="text" placeholder="Last Name" required>
+      </div>
+
+      <input id="email" name="email" type="email" placeholder="Email Address" required>
+      <input id="phone" name="phone" type="tel" placeholder="Phone Number" required>
+
+      <label class="offer-consent compact-consent">
+        <input id="consentCheckbox" name="consent" type="checkbox" required>
+        <span>
+          By checking this box, I consent to receive transactional messages from Three Brothers Realty Acquisitions LLC at the phone number provided in order to sell my property. Message frequency may vary. Message &amp; Data rates may apply. Reply HELP for help or STOP to opt-out.
+        </span>
+      </label>
+
+      <button type="submit" class="offer-submit-btn compact-submit-btn">Continue</button>
+    </form>
+
+    <div class="trust-checks compact-trust-checks">
+      <div>✔ We will not share your information or send spam</div>
+      <div>✔ We use your phone and email for contact and verification</div>
+      <div class="warning-text">✔ If you enter an incorrect number, we cannot send an offer</div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="#top">
+        <img src="/assets/three-brothers-logo.webp" class="footer-logo" alt="Three Brothers Realty">
+      </a>
+    </div>
+
+    <div>
+      <h4>Legal</h4>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Use</a>
+    </div>
+
+    <div>
+      <h4>Contact Us</h4>
+      <a href="tel:7276187152">(727) 618-7152</a>
+      <a href="mailto:info@threebrothersrealty.com">info@threebrothersrealty.com</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © <span id="year"></span> Three Brothers Realty. All Rights Reserved.
+  </div>
+</footer>
+<script src="/script.js"></script>
+</body>
+</html>

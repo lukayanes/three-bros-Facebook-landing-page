@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complete Your Offer | Three Brothers Realty</title>
+<link rel="stylesheet" href="/styles.css">
+<script src="/analytics.js"></script>
+<link rel="icon" href="/assets/three-brothers-logo.webp">
+<script>
+if (location.protocol !== 'https:') {
+  location.replace(`https://${location.host}${location.pathname}${location.search}`);
+}
+</script>
+
+</head>
+
+<body>
+
+<!-- =========================
+HEADER (MATCH INDEX)
+========================= -->
+<header class="top-nav">
+  <div class="container nav-inner">
+    <a href="/">
+      <img src="/assets/three-brothers-logo.webp" class="logo" alt="Three Brothers Realty">
+    </a>
+
+    <div class="nav-right">
+      <a href="tel:7276187152" class="phone">(727) 618-7152</a>
+      <a href="/get-offer/" class="btn-primary">Get Offer!</a>
+      <div class="hamburger" onclick="openMenu()">☰</div>
+    </div>
+  </div>
+</header>
+
+<!-- Slide Menu -->
+<div id="sideMenu" class="side-menu">
+  <div class="side-menu-inner">
+    <div class="close-btn" onclick="closeMenu()">✕</div>
+    <a href="/">Home</a>
+    <a href="/get-offer/">Get Offer</a>
+    <a href="/about/">About-Us</a>
+  </div>
+</div>
+
+<div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div>
+
+<!-- =========================
+OFFER COMPLETION SECTION
+========================= -->
+<section class="section light">
+  <div class="container narrow center">
+
+    <h1>Excellent! Help Us Learn More About Your Property and Situation...</h1>
+
+    <p class="lead-text">
+      Your two minutes will help us make our offer more quickly and more accurately. The more information we have, the better offer we can confidently make for your property:
+    </p>
+
+    <h3 id="displayAddress" class="address-highlight"></h3>
+
+    <!-- Hidden Address Field -->
+    <input type="hidden" id="addressField" name="address">
+
+    <!-- ========================= 
+    INLINE CRM FORM — META / FACEBOOK OFFLINE LEAD TRACKING
+    ========================== -->
+    <div class="form-embed" id="ghl-form-ppc2"></div>
+
+    <script>
+    (function () {
+      const stored = new URLSearchParams(window.location.search);
+
+      stored.set("recaptcha_token", stored.get("recaptcha_token") || "");
+
+      // =========================================
+      // CONTACT / ADDRESS PREFILL
+      // =========================================
+      stored.set("address1", localStorage.getItem("addressStreet") || "");
+      stored.set("city", localStorage.getItem("addressCity") || "");
+      stored.set("state", localStorage.getItem("addressState") || "");
+      stored.set("postal_code", localStorage.getItem("addressPostal") || "");
+      stored.set("country", localStorage.getItem("addressCountry") || "");
+
+      stored.set("first_name", localStorage.getItem("firstName") || "");
+      stored.set("last_name", localStorage.getItem("lastName") || "");
+      stored.set("email", localStorage.getItem("email") || "");
+      stored.set("phone", localStorage.getItem("phone") || "");
+
+      // =========================================
+      // META / FACEBOOK TRACKING FIELDS
+      // =========================================
+      [
+        "fbclid",
+        "fbc",
+        "fbp",
+        "utm_source",
+        "utm_campaign",
+        "utm_term",
+        "utm_device",
+        "utm_adgroup"
+      ].forEach(function (p) {
+        const value = localStorage.getItem(p);
+        if (value) {
+          stored.set(p, value);
+        }
+      });
+
+      stored.set("lead_source", "Facebook");
+
+      const iframe = document.createElement("iframe");
+      iframe.src =
+        "https://links.summitflowcrm.com/widget/form/dNKGsbO90msgBMgJWxKQ?" +
+        stored.toString();
+
+      iframe.style.width = "100%";
+      iframe.style.height = "1305px";
+      iframe.style.border = "none";
+      iframe.style.borderRadius = "3px";
+      iframe.id = "inline-dNKGsbO90msgBMgJWxKQ";
+      iframe.setAttribute("data-layout", "{'id':'INLINE'}");
+      iframe.setAttribute("data-trigger-type", "alwaysShow");
+      iframe.setAttribute("data-trigger-value", "");
+      iframe.setAttribute("data-activation-type", "alwaysActivated");
+      iframe.setAttribute("data-activation-value", "");
+      iframe.setAttribute("data-deactivation-type", "neverDeactivate");
+      iframe.setAttribute("data-deactivation-value", "");
+      iframe.setAttribute("data-form-name", "PPC / Website 2");
+      iframe.setAttribute("data-height", "1305");
+      iframe.setAttribute("data-layout-iframe-id", "inline-dNKGsbO90msgBMgJWxKQ");
+      iframe.setAttribute("data-form-id", "dNKGsbO90msgBMgJWxKQ");
+      iframe.setAttribute("title", "PPC / Website 2");
+
+      document.getElementById("ghl-form-ppc2").appendChild(iframe);
+    })();
+    </script>
+
+    <!-- =========================
+    TRUST CHECK SECTION
+    ========================== -->
+    <div class="trust-checks">
+      <div>✔ We will not share your information or send SPAM</div>
+      <div>✔ We use your phone and email for further contact and verification</div>
+      <div class="warning-text">✔ If you enter an incorrect number, we cannot send an offer</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================
+FOOTER (MATCH INDEX)
+========================= -->
+<footer class="footer">
+  <div class="container footer-grid">
+
+    <div>
+      <a href="#top">
+        <img src="/assets/three-brothers-logo.webp" class="footer-logo" alt="Three Brothers Realty">
+      </a>
+    </div>
+
+    <div>
+      <h4>Legal</h4>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Use</a>
+    </div>
+
+    <div>
+      <h4>Contact Us</h4>
+      <a href="tel:7276187152">(727) 618-7152</a>
+      <a href="mailto:info@threebrothersrealty.com">
+        info@threebrothersrealty.com
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © <span id="year"></span> Three Brothers Realty. All Rights Reserved.
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const params = new URLSearchParams(window.location.search);
+  const address = params.get("address");
+
+  if (address) {
+    const decoded = decodeURIComponent(address);
+    document.getElementById("addressField").value = decoded;
+    document.getElementById("displayAddress").textContent = decoded;
+  }
+</script>
+
+<script src="https://links.summitflowcrm.com/js/form_embed.js"></script>
+<script src="/script.js"></script>
+
+</body>
+</html>

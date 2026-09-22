@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three Brothers Realty — We Buy Houses For Cash</title>
+<link rel="stylesheet" href="/styles.css">
+<script src="/analytics.js"></script>
+<script>
+if (location.protocol !== 'https:') {
+location.replace(`https://${location.hostname}${location.pathname}${location.search}`);
+}
+</script>
+<link rel="icon" href="/assets/three-brothers-logo.webp">
+</head>
+<body>
+
+<header class="top-nav">
+  <div class="container nav-inner">
+    
+    <a href="/">
+      <img src="/assets/three-brothers-logo.webp" class="logo" alt="Three Brothers Realty">
+    </a>
+
+    <div class="nav-right">
+      <a href="tel:7276187152" class="phone">(727) 618-7152</a>
+      <a href="/get-offer/" class="btn-primary">Get Offer!</a>
+
+      <div class="hamburger" onclick="openMenu()">☰</div>
+    </div>
+  </div>
+</header>
+
+
+
+
+<!-- Slide Menu -->
+<div id="sideMenu" class="side-menu">
+  <div class="side-menu-inner">
+    <div class="close-btn" onclick="closeMenu()">✕</div>
+
+    <a href="/">Home</a>
+    <a href="/get-offer/">Get Offer</a>
+    <a href="/about/">About Us</a>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div>
+
+
+
+<!-- =========================
+HERO
+========================= -->
+<section class="hero" id="top">
+  <div class="overlay" style="pointer-events:none;"></div>
+
+  <div class="container hero-inner">
+    <h4>No Repairs, No Showings, No Cleaning, No Stress</h4>
+
+    <h1>
+      GET A <span class="gold">FAST CASH OFFER</span><br>
+      FOR YOUR HOUSE TODAY!
+    </h1>
+
+    <p>
+      Regardless of the condition your property is in,
+      we will find a solution that works for you.
+    </p>
+
+    <div class="floating-offer" id="floatingOffer">
+      <form id="addressForm" class="floating-offer-form">
+        <input
+          id="autocomplete"
+          name="address"
+          type="text"
+          placeholder="Home Address Here..."
+          required
+          style="position:relative; z-index:10000; pointer-events:auto;"
+        />
+        <button id="offerBtn" type="submit">Get Offer!</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+ 
+
+<!-- =========================
+WHY SELL TO US
+========================= -->
+<section class="section" id="why-sell">
+  <div class="container center">
+    <h2>Why Sell To Us?</h2>
+    <p class="subheading">We Make Selling Your Property Hassle Free</p>
+  </div>
+
+  <div class="container split">
+    <div class="image">
+      <img src="/assets/whysell.webp" alt="Beautiful Home">
+    </div>
+
+    <div class="content">
+      <p>
+        If you need to sell your house fast, you can avoid the hassles of a traditional sale.
+        Imagine having to find a real estate agent, make repairs, clean, deal with open houses
+        and showings, and pay commission and fees on top of all the work and stress in your already busy life…
+      </p>
+
+      <p>
+        <strong>Three Brothers Realty eliminates these hassles.</strong>
+        We buy properties as-is for cash, so you can keep on living your life.
+        Our goal is to make your home sale as simple as possible.
+      </p>
+
+      <a href="#top" class="btn-primary">Get Your Free Offer</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================
+HOW IT WORKS
+========================= -->
+<section class="section light">
+  <div class="container center">
+    <h2>How It Works</h2>
+    <p>Our Simple 3 Step Process</p>
+
+    <div class="steps">
+      <div class="step-card">
+        <h3>01</h3>
+        <img src="/assets/onlineform.jpg">
+        <h4>Fill Out the Online Form</h4>
+        <p>One of our specialists will call you.</p>
+      </div>
+
+      <div class="step-card">
+        <h3>02</h3>
+        <img src="/assets/closingdate.jpg">
+        <h4>Pick Your Closing Date</h4>
+        <p>No financing fall-through risk.</p>
+      </div>
+
+      <div class="step-card">
+        <h3>03</h3>
+        <img src="/assets/getpaid.jpg">
+        <h4>Get Paid and Move On</h4>
+        <p>We pay cash and close fast.</p>
+      </div>
+    </div>
+    <a href="tel:7276187152" class="phone-pill">(727) 618-7152</a>
+
+  </div>
+</section>
+
+<!-- =========================
+REASONS GRID
+========================= -->
+<section class="section">
+  <div class="container center">
+    <h2 id="stateHeading">
+      Reasons To Sell With Us In <span id="userState">Kansas</span>
+    </h2>
+
+    <p>The fastest way to sell your property.</p>
+
+    <div class="grid-4">
+      <div><img src="/assets/sellfast.webp"><p>Want To Sell Fast</p></div>
+      <div><img src="/assets/avoidrepairs.webp"><p>Avoid Costly Repairs</p></div>
+      <div><img src="/assets/inherited.webp"><p>Inherited Property</p></div>
+      <div><img src="/assets/payoff.webp"><p>Pay Off Debts Fast</p></div>
+    </div>
+
+    <!-- 🔥 Added Supporting Sentence -->
+    <p class="reasons-subtext">
+      We’ve streamlined the home selling process to eliminate the stress and complications of traditional methods.
+    </p>
+
+    <a href="#top" class="btn-primary">Get An Offer</a>
+  </div>
+</section>
+
+
+<!-- =========================
+BEFORE / AFTER
+========================= -->
+<section class="section light">
+  <div class="container split">
+
+    <!-- LEFT CONTENT -->
+    <div class="content">
+      <h2>Sell Your House Without Cleaning or Repairs</h2>
+
+      <p class="lead">
+        Don’t even bother. We’ll buy your house as-is.
+      </p>
+
+      <p>
+        Our team handles everything so you don’t have to worry about repairs,
+        cleaning, or preparing the property for showings.
+      </p>
+
+      <a href="#top" class="btn-primary">
+        Request a FREE Offer
+      </a>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="image before-after">
+      <img src="/assets/before-and-after2.jpg" alt="Before and After renovation">
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================
+THIN CTA STRIP
+========================= -->
+<section class="cta-strip">
+  <div class="cta-overlay"></div>
+
+  <div class="container cta-inner">
+
+    <!-- LEFT LOGO -->
+    <div class="cta-left">
+      <img src="/assets/three-brothers-logo.webp" class="cta-logo" alt="Three Brothers Realty Logo">
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="cta-right">
+      <h2>WE BUY HOUSES FOR CASH</h2>
+      <p>As-is and on your timeline.</p>
+
+      <div class="cta-points">
+        <span>✔ We Can Sell Your House Fast</span>
+        <span>✔ We Make The Process Easy</span>
+        <span>✔ No Hidden Fees</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- =========================
+TESTIMONIALS
+========================= -->
+<section class="section light testimonials-section">
+  <div class="container center">
+    <h2>Selling Fast and Feeling Good</h2>
+    <p class="subhead">Customer Success Stories</p>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="quote-mark">“</div>
+        <div class="stars">★★★★★</div>
+        <p>
+          “Huge thanks to your team for guiding me through this tough time.
+          You’ve truly been a lifeline, and I can’t express my gratitude enough.”
+        </p>
+        <strong>Emily W.,</strong>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="quote-mark">“</div>
+        <div class="stars">★★★★★</div>
+        <p>
+          “Avoided foreclosure. Their cash offer saved me!
+          Big thanks for their support!”
+        </p>
+        <strong>Lila C.,</strong>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="quote-mark">“</div>
+        <div class="stars">★★★★★</div>
+        <p>
+          “Selling my old place was tough until I found a buyer who made it easy.
+          They gave good money for it, and everything went really smooth.”
+        </p>
+        <strong>Rosa G.,</strong>
+      </div>
+
+    </div>
+
+    <a href="tel:7276187152" class="phone-pill">(727) 618-7152</a>
+  </div>
+</section>
+
+
+<!-- =========================
+FAQ
+========================= -->
+<section class="section light" id="faq">
+  <div class="container">
+    <h2 class="center">Frequently Asked Questions</h2>
+    <p class="center faq-sub">We Have The Answers</p>
+
+    <div class="faq">
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What do you do with my information?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          We use your information strictly to evaluate your property and prepare your offer.
+          We never sell or share your personal information with third parties.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Do I need to clean or fix anything?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          No. We buy houses completely as-is. You don’t need to make repairs, clean, or remove items.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          But my house is in REALLY bad shape...
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          That’s okay. We specialize in buying homes in any condition — including fire damage,
+          foundation issues, inherited properties, and distressed homes.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Do I pay any fees?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          No commissions. No hidden fees. We make a cash offer and cover typical closing costs.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Why work with a cash buyer?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Cash buyers eliminate financing delays, inspections, and buyer fall-through risk.
+          You choose your closing date and avoid the stress of listing traditionally.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================
+FOOTER
+========================= -->
+<footer class="footer">
+  <div class="container footer-grid">
+
+    <div>
+      <a href="#top">
+        <img src="/assets/three-brothers-logo.webp" class="footer-logo" alt="Three Brothers Realty">
+      </a>
+
+    </div>
+
+    <div>
+      <h4>Legal</h4>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Use</a>
+    </div>
+
+    <div>
+      <h4>Contact Us</h4>
+      <a href="tel:7276187152">(727) 618-7152</a>
+      <a href="mailto:info@threebrothersrealty.com">
+        info@threebrothersrealty.com
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © <span id="year"></span> Three Brothers Realty. All Rights Reserved.
+  </div>
+</footer>
+
+
+<script src="/script.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc9X80v6obtTTfNm8GGVd7puMFjcwCdjw&libraries=places&callback=initAutocomplete" async defer></script>
+</body>
+</html>
