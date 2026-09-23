@@ -4,36 +4,46 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Three Brothers Realty — We Buy Houses For Cash</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap">
 <link rel="stylesheet" href="/styles.css">
 <script src="/analytics.js"></script>
 <link rel="icon" href="/assets/three-brothers-logo.webp">
 </head>
 <body>
-
+<svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.94 5.96 6.56.95-4.75 4.63 1.12 6.54L12 17.5l-5.87 3.08 1.12-6.54L2.5 9.41l6.56-.95L12 2.5z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M10 5C6.1 5.8 3.5 9 3.5 13v6h6.5v-6.5H6.6c.2-2.6 1.8-4.4 4.1-5.1L10 5zm10.5 0c-3.9.8-6.5 4-6.5 8v6h6.5v-6.5h-3.4c.2-2.6 1.8-4.4 4.1-5.1L20.5 5z"/></symbol>
+</svg>
 <header class="top-nav">
   <div class="container nav-inner">
-    
-    <a href="/">
+    <a href="/" aria-label="Three Brothers Realty home">
       <img src="/assets/three-brothers-logo.webp" class="logo" alt="Three Brothers Realty">
     </a>
 
     <div class="nav-right">
-      <a href="tel:7276187152" class="phone">(727) 618-7152</a>
+      <a href="tel:7276187152" class="phone"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>(727) 618-7152</a>
       <a href="/get-offer/" class="btn-primary">Get Offer!</a>
-
-      <div class="hamburger" onclick="openMenu()">☰</div>
+      <button type="button" class="hamburger" onclick="openMenu()" aria-label="Open menu" aria-controls="sideMenu"><svg class="i" aria-hidden="true"><use href="#i-menu"/></svg></button>
     </div>
   </div>
 </header>
 
-
-
-
 <!-- Slide Menu -->
 <div id="sideMenu" class="side-menu">
   <div class="side-menu-inner">
-    <div class="close-btn" onclick="closeMenu()">✕</div>
-
+    <div class="side-menu-head">
+      <img src="/assets/three-brothers-logo.webp" class="side-logo" alt="">
+      <button type="button" class="close-btn" onclick="closeMenu()" aria-label="Close menu"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div>
     <a href="/">Home</a>
     <a href="/get-offer/">Get Offer</a>
     <a href="/about/">About Us</a>
@@ -44,7 +54,6 @@
 <div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div>
 
 
-
 <!-- =========================
 HERO
 ========================= -->
@@ -52,51 +61,54 @@ HERO
   <div class="overlay" style="pointer-events:none;"></div>
 
   <div class="container hero-inner">
-    <h4>No Repairs, No Showings, No Cleaning, No Stress</h4>
+    <div class="hero-copy">
+      <h4>No Repairs, No Showings, No Cleaning, No Stress</h4>
 
-    <h1>
-      GET A <span class="gold">FAST CASH OFFER</span><br>
-      FOR YOUR HOUSE TODAY!
-    </h1>
+      <h1 class="sc" aria-label="Get a fast cash offer for your house today!">
+        GET A <span class="gold">FAST CASH OFFER</span><br>
+        FOR YOUR HOUSE TODAY!
+      </h1>
 
-    <p>
-      Regardless of the condition your property is in,
-      we will find a solution that works for you.
-    </p>
-
-    <div class="floating-offer" id="floatingOffer">
-      <form id="addressForm" class="floating-offer-form">
-        <input
-          id="autocomplete"
-          name="address"
-          type="text"
-          placeholder="Home Address Here..."
-          required
-          style="position:relative; z-index:10000; pointer-events:auto;"
-        />
-        <button id="offerBtn" type="submit">Get Offer!</button>
-      </form>
+      <p>
+        Regardless of the condition your property is in,
+        we will find a solution that works for you.
+      </p>
     </div>
+
+    <div class="offer-slot">
+      <div class="floating-offer" id="floatingOffer">
+        <form id="addressForm" class="floating-offer-form">
+          <span class="field-icon" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg></span>
+          <input
+            id="autocomplete"
+            name="address"
+            type="text"
+            placeholder="Home Address Here..."
+            aria-label="Home address"
+            required
+          style="position:relative; z-index:10000; pointer-events:auto;"
+          />
+          <button id="offerBtn" type="submit">Get Offer!</button>
+        </form>
+      </div>
+      </div>
   </div>
 </section>
 
- 
 
 <!-- =========================
 WHY SELL TO US
 ========================= -->
 <section class="section" id="why-sell">
-  <div class="container center">
-    <h2>Why Sell To Us?</h2>
-    <p class="subheading">We Make Selling Your Property Hassle Free</p>
-  </div>
-
   <div class="container split">
     <div class="image">
       <img src="/assets/whysell.webp" alt="Beautiful Home">
     </div>
 
     <div class="content">
+      <h2>Why Sell To Us?</h2>
+      <p class="subheading">We Make Selling Your Property Hassle Free</p>
+
       <p>
         If you need to sell your house fast, you can avoid the hassles of a traditional sale.
         Imagine having to find a real estate agent, make repairs, clean, deal with open houses
@@ -120,33 +132,35 @@ HOW IT WORKS
 ========================= -->
 <section class="section light">
   <div class="container center">
-    <h2>How It Works</h2>
-    <p>Our Simple 3 Step Process</p>
+    <div class="section-head">
+      <h2>How It Works</h2>
+      <p>Our Simple 3 Step Process</p>
+    </div>
 
     <div class="steps">
       <div class="step-card">
         <h3>01</h3>
-        <img src="/assets/onlineform.jpg">
+        <img src="/assets/onlineform.jpg" alt="Fill out the online form">
         <h4>Fill Out the Online Form</h4>
         <p>One of our specialists will call you.</p>
       </div>
 
       <div class="step-card">
         <h3>02</h3>
-        <img src="/assets/closingdate.jpg">
+        <img src="/assets/closingdate.jpg" alt="Pick your closing date">
         <h4>Pick Your Closing Date</h4>
         <p>No financing fall-through risk.</p>
       </div>
 
       <div class="step-card">
         <h3>03</h3>
-        <img src="/assets/getpaid.jpg">
+        <img src="/assets/getpaid.jpg" alt="Get paid and move on">
         <h4>Get Paid and Move On</h4>
         <p>We pay cash and close fast.</p>
       </div>
     </div>
-    <a href="tel:7276187152" class="phone-pill">(727) 618-7152</a>
 
+    <div class="cta-row"><a href="tel:7276187152" class="phone-pill"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>(727) 618-7152</a></div>
   </div>
 </section>
 
@@ -155,20 +169,21 @@ REASONS GRID
 ========================= -->
 <section class="section">
   <div class="container center">
-    <h2 id="stateHeading">
-      Reasons To Sell With Us In <span id="userState">Kansas</span>
-    </h2>
+    <div class="section-head">
+      <h2 id="stateHeading">
+        Reasons To Sell With Us In <span id="userState">Florida</span>
+      </h2>
 
-    <p>The fastest way to sell your property.</p>
-
-    <div class="grid-4">
-      <div><img src="/assets/sellfast.webp"><p>Want To Sell Fast</p></div>
-      <div><img src="/assets/avoidrepairs.webp"><p>Avoid Costly Repairs</p></div>
-      <div><img src="/assets/inherited.webp"><p>Inherited Property</p></div>
-      <div><img src="/assets/payoff.webp"><p>Pay Off Debts Fast</p></div>
+      <p>The fastest way to sell your property.</p>
     </div>
 
-    <!-- 🔥 Added Supporting Sentence -->
+    <div class="grid-4">
+      <div><img src="/assets/sellfast.webp" alt=""><p>Want To Sell Fast</p></div>
+      <div><img src="/assets/avoidrepairs.webp" alt=""><p>Avoid Costly Repairs</p></div>
+      <div><img src="/assets/inherited.webp" alt=""><p>Inherited Property</p></div>
+      <div><img src="/assets/payoff.webp" alt=""><p>Pay Off Debts Fast</p></div>
+    </div>
+
     <p class="reasons-subtext">
       We’ve streamlined the home selling process to eliminate the stress and complications of traditional methods.
     </p>
@@ -184,7 +199,6 @@ BEFORE / AFTER
 <section class="section light">
   <div class="container split">
 
-    <!-- LEFT CONTENT -->
     <div class="content">
       <h2>Sell Your House Without Cleaning or Repairs</h2>
 
@@ -202,7 +216,6 @@ BEFORE / AFTER
       </a>
     </div>
 
-    <!-- RIGHT IMAGE -->
     <div class="image before-after">
       <img src="/assets/before-and-after2.jpg" alt="Before and After renovation">
     </div>
@@ -211,27 +224,25 @@ BEFORE / AFTER
 </section>
 
 <!-- =========================
-THIN CTA STRIP
+CTA BAND
 ========================= -->
 <section class="cta-strip">
   <div class="cta-overlay"></div>
 
   <div class="container cta-inner">
 
-    <!-- LEFT LOGO -->
     <div class="cta-left">
       <img src="/assets/three-brothers-logo.webp" class="cta-logo" alt="Three Brothers Realty Logo">
     </div>
 
-    <!-- RIGHT CONTENT -->
     <div class="cta-right">
-      <h2>WE BUY HOUSES FOR CASH</h2>
+      <h2 class="sc" aria-label="We buy houses for cash">WE BUY HOUSES FOR CASH</h2>
       <p>As-is and on your timeline.</p>
 
       <div class="cta-points">
-        <span>✔ We Can Sell Your House Fast</span>
-        <span>✔ We Make The Process Easy</span>
-        <span>✔ No Hidden Fees</span>
+        <span><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>We Can Sell Your House Fast</span>
+        <span><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>We Make The Process Easy</span>
+        <span><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>No Hidden Fees</span>
       </div>
     </div>
 
@@ -239,50 +250,66 @@ THIN CTA STRIP
 </section>
 
 
-
 <!-- =========================
 TESTIMONIALS
 ========================= -->
-<section class="section light testimonials-section">
+<section class="section testimonials-section">
   <div class="container center">
-    <h2>Selling Fast and Feeling Good</h2>
-    <p class="subhead">Customer Success Stories</p>
-
-    <div class="testimonials-grid">
-
-      <div class="testimonial-card">
-        <div class="quote-mark">“</div>
-        <div class="stars">★★★★★</div>
-        <p>
-          “Huge thanks to your team for guiding me through this tough time.
-          You’ve truly been a lifeline, and I can’t express my gratitude enough.”
-        </p>
-        <strong>Emily W.,</strong>
+    <div class="section-head">
+      <h2>Selling Fast and Feeling Good</h2>
+      <p class="subhead">Customer Success Stories</p>
+      <div class="rating-line">
+        <span class="stars" role="img" aria-label="Rated 5 out of 5"><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg></span>
+        <span class="rating-text"><strong>5.0</strong> average · 7 Google reviews</span>
       </div>
-
-      <div class="testimonial-card">
-        <div class="quote-mark">“</div>
-        <div class="stars">★★★★★</div>
-        <p>
-          “Avoided foreclosure. Their cash offer saved me!
-          Big thanks for their support!”
-        </p>
-        <strong>Lila C.,</strong>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="quote-mark">“</div>
-        <div class="stars">★★★★★</div>
-        <p>
-          “Selling my old place was tough until I found a buyer who made it easy.
-          They gave good money for it, and everything went really smooth.”
-        </p>
-        <strong>Rosa G.,</strong>
-      </div>
-
     </div>
 
-    <a href="tel:7276187152" class="phone-pill">(727) 618-7152</a>
+    <div class="testimonials-grid" role="region" aria-label="Customer reviews">
+      <div class="t-col">
+        <div class="testimonial-card">
+          <div class="quote-mark" aria-hidden="true"><svg class="i i-fill" aria-hidden="true"><use href="#i-quote"/></svg></div>
+          <div class="stars" role="img" aria-label="5 out of 5 stars"><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg></div>
+          <p>“I would recommend this company to anyone. They were the most professional company I've ever worked with. They were awesome throughout the entire process. It took absolutely no work on our part to sell our house. They were fair with the offering and they helped us move on. Made us feel comfortable the entire time. Actually sold the house on the first open house for a great price. They are not looking to make a fortune off your house just a living. I thank them with our entire hearts for what they did for us.”</p>
+          <strong>Ron Stevens</strong>
+        </div>
+        <div class="testimonial-card">
+          <div class="quote-mark" aria-hidden="true"><svg class="i i-fill" aria-hidden="true"><use href="#i-quote"/></svg></div>
+          <div class="stars" role="img" aria-label="5 out of 5 stars"><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg></div>
+          <p>“The guys Luka and Brennin are so awesome to work with”</p>
+          <strong>Stephen Nortier</strong>
+        </div>
+      </div>
+      <div class="t-col">
+        <div class="testimonial-card">
+          <div class="quote-mark" aria-hidden="true"><svg class="i i-fill" aria-hidden="true"><use href="#i-quote"/></svg></div>
+          <div class="stars" role="img" aria-label="5 out of 5 stars"><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg></div>
+          <p>“They were great. The sale and closing of my house was smooth as silk. They went above and beyond to help me meet the May first closing date as I had a fractured elbow and needed a lot of help. Brennan became my best friend and goto guy!”</p>
+          <strong>Diana Gray</strong>
+        </div>
+        <div class="testimonial-card">
+          <div class="quote-mark" aria-hidden="true"><svg class="i i-fill" aria-hidden="true"><use href="#i-quote"/></svg></div>
+          <div class="stars" role="img" aria-label="5 out of 5 stars"><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg></div>
+          <p>“Great company to sell your property with. Communicated every step of the way and explained everything they was doing or needed.”</p>
+          <strong>Johnathon Hollis</strong>
+        </div>
+      </div>
+      <div class="t-col">
+        <div class="testimonial-card">
+          <div class="quote-mark" aria-hidden="true"><svg class="i i-fill" aria-hidden="true"><use href="#i-quote"/></svg></div>
+          <div class="stars" role="img" aria-label="5 out of 5 stars"><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg></div>
+          <p>“They were amazing and professional the entire time. I was going through a lot and yet they were able to work around everything and get my house sold in a timely manor. I would recommend them 100%. They work hard for you so you don't have to.”</p>
+          <strong>Angela Martinez</strong>
+        </div>
+        <div class="testimonial-card">
+          <div class="quote-mark" aria-hidden="true"><svg class="i i-fill" aria-hidden="true"><use href="#i-quote"/></svg></div>
+          <div class="stars" role="img" aria-label="5 out of 5 stars"><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg><svg class="i i-fill" aria-hidden="true"><use href="#i-star"/></svg></div>
+          <p>“Great to work with! Excellent communication throughout the whole process!”</p>
+          <strong>Janis Lothrop</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-row"><a href="tel:7276187152" class="phone-pill"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>(727) 618-7152</a></div>
   </div>
 </section>
 
@@ -291,16 +318,18 @@ TESTIMONIALS
 FAQ
 ========================= -->
 <section class="section light" id="faq">
-  <div class="container">
-    <h2 class="center">Frequently Asked Questions</h2>
-    <p class="center faq-sub">We Have The Answers</p>
+  <div class="container faq-layout">
+    <div class="faq-head">
+      <h2 class="center">Frequently Asked Questions</h2>
+      <p class="center faq-sub">We Have The Answers</p>
+    </div>
 
     <div class="faq">
 
       <div class="faq-item">
         <button class="faq-question">
           What do you do with my information?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
         <div class="faq-answer">
           We use your information strictly to evaluate your property and prepare your offer.
@@ -311,7 +340,7 @@ FAQ
       <div class="faq-item">
         <button class="faq-question">
           Do I need to clean or fix anything?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
         <div class="faq-answer">
           No. We buy houses completely as-is. You don’t need to make repairs, clean, or remove items.
@@ -321,7 +350,7 @@ FAQ
       <div class="faq-item">
         <button class="faq-question">
           But my house is in REALLY bad shape...
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
         <div class="faq-answer">
           That’s okay. We specialize in buying homes in any condition — including fire damage,
@@ -332,7 +361,7 @@ FAQ
       <div class="faq-item">
         <button class="faq-question">
           Do I pay any fees?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
         <div class="faq-answer">
           No commissions. No hidden fees. We make a cash offer and cover typical closing costs.
@@ -342,7 +371,7 @@ FAQ
       <div class="faq-item">
         <button class="faq-question">
           Why work with a cash buyer?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
         <div class="faq-answer">
           Cash buyers eliminate financing delays, inspections, and buyer fall-through risk.
@@ -355,17 +384,13 @@ FAQ
 </section>
 
 
-<!-- =========================
-FOOTER
-========================= -->
 <footer class="footer">
   <div class="container footer-grid">
 
     <div>
-      <a href="#top">
+      <a href="#top" class="footer-brand">
         <img src="/assets/three-brothers-logo.webp" class="footer-logo" alt="Three Brothers Realty">
       </a>
-
     </div>
 
     <div>
@@ -377,9 +402,7 @@ FOOTER
     <div>
       <h4>Contact Us</h4>
       <a href="tel:7276187152">(727) 618-7152</a>
-      <a href="mailto:info@threebrothersrealty.com">
-        info@threebrothersrealty.com
-      </a>
+      <a href="mailto:info@threebrothersrealty.com">info@threebrothersrealty.com</a>
     </div>
 
   </div>
@@ -392,5 +415,6 @@ FOOTER
 
 <script src="/script.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc9X80v6obtTTfNm8GGVd7puMFjcwCdjw&libraries=places&callback=initAutocomplete" async defer></script>
+<script>(function(){var y=document.getElementById("year");if(y&&!y.textContent)y.textContent=new Date().getFullYear();})();</script>
 </body>
 </html>

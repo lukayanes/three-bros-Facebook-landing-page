@@ -15,13 +15,26 @@
    ========================================================= */
 
 var TBR_ANALYTICS = {
-  GA_MEASUREMENT_ID: "REPLACE_WITH_GA4_ID",      // e.g. "G-ABC1234XYZ"
+  GA_MEASUREMENT_ID: "G-QMCBQVLCKM",            // e.g. "G-ABC1234XYZ"
   META_PIXEL_ID:     "REPLACE_WITH_PIXEL_ID"     // e.g. "1234567890123456"
 };
 
 (function () {
   var cfg = TBR_ANALYTICS;
   var unset = function (v) { return !v || v.indexOf("REPLACE_WITH") === 0; };
+
+  /* Lead conversion. The CRM form is a cross-origin iframe, so this page
+     can't see the submit itself — but GoHighLevel redirects to /thank-you/
+     after a successful submission, so reaching that page IS the lead.
+     Counted once per browser session so a refresh doesn't double-count. */
+  var isLead = (function () {
+    if (!/^\/thank-you\/?$/.test(location.pathname)) return false;
+    try {
+      if (sessionStorage.getItem("tbr_lead_counted")) return false;
+      sessionStorage.setItem("tbr_lead_counted", "1");
+    } catch (e) {}
+    return true;
+  })();
 
   /* ---------- Google Analytics 4 ---------- */
   if (unset(cfg.GA_MEASUREMENT_ID)) {
@@ -36,6 +49,7 @@ var TBR_ANALYTICS = {
     window.gtag = function () { window.dataLayer.push(arguments); };
     gtag("js", new Date());
     gtag("config", cfg.GA_MEASUREMENT_ID);
+    if (isLead) gtag("event", "generate_lead");
   }
 
   /* ---------- Meta (Facebook) Pixel ---------- */
@@ -56,14 +70,6 @@ var TBR_ANALYTICS = {
 
   fbq("init", cfg.META_PIXEL_ID);
   fbq("track", "PageView");
+  if (isLead) fbq("track", "Lead");
 
-  /* noscript fallback, injected so the ID lives in one place */
-  document.addEventListener("DOMContentLoaded", function () {
-    var ns = document.createElement("noscript");
-    var img = document.createElement("img");
-    img.height = 1; img.width = 1; img.style.display = "none";
-    img.src = "https://www.facebook.com/tr?id=" + cfg.META_PIXEL_ID + "&ev=PageView&noscript=1";
-    ns.appendChild(img);
-    document.body.appendChild(ns);
-  });
 })();

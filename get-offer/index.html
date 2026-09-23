@@ -4,69 +4,93 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Get Offer | Three Brothers Realty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap">
 <link rel="stylesheet" href="/styles.css">
 <script src="/analytics.js"></script>
 <link rel="icon" href="/assets/three-brothers-logo.webp">
-
 </head>
-
 <body>
-
+<svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.94 5.96 6.56.95-4.75 4.63 1.12 6.54L12 17.5l-5.87 3.08 1.12-6.54L2.5 9.41l6.56-.95L12 2.5z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M10 5C6.1 5.8 3.5 9 3.5 13v6h6.5v-6.5H6.6c.2-2.6 1.8-4.4 4.1-5.1L10 5zm10.5 0c-3.9.8-6.5 4-6.5 8v6h6.5v-6.5h-3.4c.2-2.6 1.8-4.4 4.1-5.1L20.5 5z"/></symbol>
+</svg>
 <header class="top-nav">
   <div class="container nav-inner">
-    <a href="/">
+    <a href="/" aria-label="Three Brothers Realty home">
       <img src="/assets/three-brothers-logo.webp" class="logo" alt="Three Brothers Realty">
     </a>
 
     <div class="nav-right">
-      <a href="tel:7276187152" class="phone">(727) 618-7152</a>
+      <a href="tel:7276187152" class="phone"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>(727) 618-7152</a>
       <a href="/get-offer/" class="btn-primary">Get Offer!</a>
-      <div class="hamburger" onclick="openMenu()">☰</div>
+      <button type="button" class="hamburger" onclick="openMenu()" aria-label="Open menu" aria-controls="sideMenu"><svg class="i" aria-hidden="true"><use href="#i-menu"/></svg></button>
     </div>
   </div>
 </header>
 
+<!-- Slide Menu -->
 <div id="sideMenu" class="side-menu">
   <div class="side-menu-inner">
-    <div class="close-btn" onclick="closeMenu()">✕</div>
+    <div class="side-menu-head">
+      <img src="/assets/three-brothers-logo.webp" class="side-logo" alt="">
+      <button type="button" class="close-btn" onclick="closeMenu()" aria-label="Close menu"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div>
     <a href="/">Home</a>
     <a href="/get-offer/">Get Offer</a>
     <a href="/about/">About Us</a>
   </div>
 </div>
 
+<!-- Overlay -->
 <div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div>
 
-<section class="hero" id="top">
+<section class="hero hero-short" id="top">
   <div class="overlay"></div>
 
   <div class="container hero-inner">
-    <h4>No Repairs, No Showings, No Cleaning, No Stress</h4>
+    <div class="hero-copy">
+      <h4>No Repairs, No Showings, No Cleaning, No Stress</h4>
 
-    <h1>
-      LET'S GET <span class="gold">STARTED</span>
-    </h1>
-
-    <div class="floating-offer" id="floatingOffer">
-      <form id="addressForm" class="floating-offer-form">
-        <input
-          id="autocomplete"
-          name="address"
-          type="text"
-          placeholder="Home Address Here..."
-          autocomplete="street-address"
-          required
-        />
-        <button id="offerBtn" type="submit">Get Offer!</button>
-      </form>
+      <h1 class="sc" aria-label="Let's get started">
+        LET'S GET <span class="gold">STARTED</span>
+      </h1>
     </div>
+
+    <div class="offer-slot">
+      <div class="floating-offer" id="floatingOffer">
+        <form id="addressForm" class="floating-offer-form">
+          <span class="field-icon" aria-hidden="true"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg></span>
+          <input
+            id="autocomplete"
+            name="address"
+            type="text"
+            placeholder="Home Address Here..."
+            aria-label="Home address"
+          autocomplete="street-address"
+            required
+          />
+          <button id="offerBtn" type="submit">Get Offer!</button>
+        </form>
+      </div>
+      </div>
   </div>
 </section>
 
 <section class="section light">
   <div class="container center">
-    <h2>How It Works</h2>
-    <p>Our Simple 3 Step Process</p>
+    <div class="section-head">
+      <h2>How It Works</h2>
+      <p>Our Simple 3 Step Process</p>
+    </div>
 
     <div class="steps">
       <div class="step-card">
@@ -91,14 +115,15 @@
       </div>
     </div>
 
-    <a href="tel:7276187152" class="phone-pill">(727) 618-7152</a>
+    <div class="cta-row"><a href="tel:7276187152" class="phone-pill"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>(727) 618-7152</a></div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="container footer-grid">
+
     <div>
-      <a href="#top">
+      <a href="#top" class="footer-brand">
         <img src="/assets/three-brothers-logo.webp" class="footer-logo" alt="Three Brothers Realty">
       </a>
     </div>
@@ -114,6 +139,7 @@
       <a href="tel:7276187152">(727) 618-7152</a>
       <a href="mailto:info@threebrothersrealty.com">info@threebrothersrealty.com</a>
     </div>
+
   </div>
 
   <div class="footer-bottom">
@@ -123,6 +149,7 @@
 
 <script src="/script.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc9X80v6obtTTfNm8GGVd7puMFjcwCdjw&libraries=places&callback=initAutocomplete" async defer></script>
+<script>(function(){var y=document.getElementById("year");if(y&&!y.textContent)y.textContent=new Date().getFullYear();})();</script>
 
 </body>
 </html>
