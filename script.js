@@ -128,6 +128,38 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* ===============================
+   NEW CRM (LEO) — LEAD DELIVERY
+   The ingest endpoint doesn't support CORS, so this is sent as a "simple"
+   request: no-cors with a form-encoded body (it ignores text/plain bodies)
+   (verified 2026-10-30). keepalive lets it finish even though the page
+   navigates away right after. Fire-and-forget: it can never block or break
+   the existing lead flow.
+================================ */
+// Facebook-landing-page leads. (The two main websites use a separate key.)
+const CRM_INGEST_URL = "https://api.leo.sm3marketing.com/v1/ingest/SoOifVA0u3TCRA2sbk0WW3RFs_AISeA8";
+
+function sendLeadToCRM(lead) {
+  try {
+    const payload = Object.assign({
+      source: location.hostname,
+      page_url: location.href,
+      submitted_at: new Date().toISOString()
+    }, lead);
+    // Drop blanks so the CRM never overwrites a field with an empty value.
+    Object.keys(payload).forEach(function (k) {
+      if (payload[k] === "" || payload[k] == null) delete payload[k];
+    });
+    fetch(CRM_INGEST_URL, {
+      method: "POST",
+      mode: "no-cors",
+      keepalive: true,
+      // URLSearchParams sets Content-Type: application/x-www-form-urlencoded.
+      body: new URLSearchParams(payload)
+    }).catch(function () {});
+  } catch (e) {}
+}
+
+/* ===============================
 CONTACT FORM SUBMIT
 /get-your-offer/ -> /get-your-offer-send/
 ================================ */
@@ -165,6 +197,46 @@ document.addEventListener("DOMContentLoaded", function () {
     params.set("last_name", lastName);
     params.set("email", email);
     params.set("phone", phone);
+
+    // Step 2 is where a lead has full contact details and has given SMS
+    // consent, so it's captured here even if they never finish step 3.
+    const consentEl = document.getElementById("consentCheckbox");
+    const consentText = consentEl && consentEl.closest("label")
+      ? consentEl.closest("label").textContent.replace(/\s+/g, " ").trim()
+      : "";
+    const crmLead = {
+      brand: "Three Brothers Realty",
+      lead_source: "Facebook",
+      form: "Facebook landing page",
+      first_name: firstName,
+      last_name: lastName,
+      full_name: (firstName + " " + lastName).trim(),
+      email: email,
+      phone: phone,
+      address: address,
+      street: localStorage.getItem("addressStreet") || "",
+      city: city,
+      state: state,
+      postal_code: postal,
+      country: country,
+      sms_consent: !!(consentEl && consentEl.checked),
+      consent_method: "checkbox",
+      sms_consent_text: consentText
+    };
+    ["fbclid", "fbc", "fbp", "utm_source", "utm_medium", "utm_campaign_name",
+     "utm_campaign", "utm_adgroup", "utm_ad", "utm_term", "utm_device"].forEach(function (k) {
+      const v = localStorage.getItem(k);
+      if (v) crmLead[k] = v;
+    });
+    // Send once per lead per session: a double-tap on Continue, or Back then
+    // Continue, would otherwise create a duplicate lead in the CRM.
+    const crmSig = [email, phone, address].join("|").toLowerCase();
+    let alreadySent = false;
+    try {
+      alreadySent = sessionStorage.getItem("crm_lead_sent") === crmSig;
+      if (!alreadySent) sessionStorage.setItem("crm_lead_sent", crmSig);
+    } catch (e) {}
+    if (!alreadySent) sendLeadToCRM(crmLead);
 
     window.location.href = "/get-your-offer-send/?" + params.toString();
   });
