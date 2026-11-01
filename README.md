@@ -23,17 +23,19 @@ a warning for whichever one is still unset.
 
 ## Lead flow
 
-1. `index.html` — address entry (Google Places autocomplete)
-2. `get-your-offer.html` — name / email / phone
-3. `get-your-offer-send.html` — embedded CRM form, receives everything
+1. `/` — address entry (Google Places autocomplete)
+2. `/get-your-offer/` — name / email / phone + SMS consent
+3. `/get-your-offer-send/` — reason for selling, asking price, listed with a
+   Realtor; submitting sends the complete lead to the CRM, then `/thank-you/`
 
-Carried through the whole funnel and handed to the CRM form:
-`address`, `first_name`, `last_name`, `email`, `phone`, `fbclid`, `fbc`, `fbp`,
-`utm_source`, `utm_medium`, `utm_campaign`, `lead_source=Facebook`.
+Steps 1 and 2 keep their answers in the browser (`localStorage`); step 3 sends
+everything — address, contact details, consent, step-3 answers, `fbclid`,
+`fbc`, `fbp` and UTMs — to the CRM's ingest URL (`CRM_INGEST_URL` in
+`script.js`). Nothing is sent before step 3. Since 2026-11-01 these leads go to
+the new CRM only (the GoHighLevel form that used to be step 3 was removed).
 
-The CRM form is a GoHighLevel embed (form `dNKGsbO90msgBMgJWxKQ`). Leads
-currently route to the Summit Group CRM — change the iframe URL in
-`get-your-offer-send.html` to point somewhere else.
+`script.js` is loaded as `/script.js?v=…`: bump that value in every page when
+the script changes, so browsers holding the old copy fetch the new one.
 
 ## Deploying
 

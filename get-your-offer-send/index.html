@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap">
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css?v=20261101">
 <script src="/analytics.js"></script>
 <link rel="icon" href="/assets/three-brothers-logo.webp">
 </head>
@@ -53,104 +53,56 @@
 <!-- Overlay -->
 <div id="menuOverlay" class="menu-overlay" onclick="closeMenu()"></div>
 
-<!-- =========================
-OFFER COMPLETION SECTION
-========================= -->
-<section class="offer-step-section step-send">
-  <div class="offer-step-wrap wide">
+<section class="offer-step-section step-contact">
+  <div class="offer-step-wrap compact-offer-wrap">
 
     <div class="step-progress" aria-hidden="true"><span class="on"></span><span class="on"></span><span class="on"></span></div>
 
-    <h1>Excellent! Help Us Learn More About Your Property and Situation...</h1>
-
-    <p class="lead-text">
-      Your two minutes will help us make our offer more quickly and more accurately. The more information we have, the better offer we can confidently make for your property:
+    <h1 class="offer-step-title">Excellent! Last step.</h1>
+    <p class="offer-step-subtitle">
+      A few quick questions help us make a faster, more accurate offer for
+      <span id="displayAddress" class="address-inline"></span>.
     </p>
 
-    <h3 id="displayAddress" class="address-highlight"></h3>
+    <form id="detailsForm" class="offer-contact-form compact-offer-form">
+      <!-- Spam trap: hidden from people, so only bots fill it in -->
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
 
-    <!-- Hidden Address Field -->
-    <input type="hidden" id="addressField" name="address">
+      <select id="reasonForSelling" name="reason_for_selling" aria-label="Reason for Selling">
+        <option value="">Reason for Selling</option>
+        <option>Relocation</option>
+        <option>Downsizing</option>
+        <option>Needs Repair</option>
+        <option>Emergency Reasons</option>
+        <option>Selling a Vacant/Non Occupied Home</option>
+        <option>Sell and Rent Instead</option>
+        <option>Inherited Property</option>
+        <option>Legal Issues</option>
+        <option>Retirement</option>
+        <option>Other</option>
+      </select>
 
-    <!-- =========================
-    INLINE CRM FORM — META / FACEBOOK OFFLINE LEAD TRACKING
-    ========================== -->
-    <div class="form-embed" id="ghl-form-ppc2"></div>
+      <div class="offer-field">
+        <input id="askingPrice" name="asking_price" type="text" inputmode="decimal" placeholder="Your Fair Asking Price" aria-label="Your Fair Asking Price" aria-describedby="askingPriceHint" autocomplete="off">
+        <p id="askingPriceHint" class="offer-field-hint">You won't pay for repairs or closing costs</p>
+      </div>
 
-    <script>
-    (function () {
-      const stored = new URLSearchParams(window.location.search);
+      <select id="listedWithRealtor" name="listed_with_realtor" aria-label="Is the property listed with a Realtor?">
+        <option value="">Listed With a Realtor?</option>
+        <option>Yes</option>
+        <option>No</option>
+      </select>
 
-      stored.set("recaptcha_token", stored.get("recaptcha_token") || "");
+      <p class="offer-consent offer-legal">
+        <span>By submitting this form, you agree to our <a href="/privacy/">Privacy Policy</a> and <a href="/terms/">Terms of Use</a>.</span>
+      </p>
 
-      // =========================================
-      // CONTACT / ADDRESS PREFILL
-      // =========================================
-      stored.set("address1", localStorage.getItem("addressStreet") || "");
-      stored.set("city", localStorage.getItem("addressCity") || "");
-      stored.set("state", localStorage.getItem("addressState") || "");
-      stored.set("postal_code", localStorage.getItem("addressPostal") || "");
-      stored.set("country", localStorage.getItem("addressCountry") || "");
+      <button type="submit" class="offer-submit-btn compact-submit-btn">Get My Offer</button>
+    </form>
 
-      stored.set("first_name", localStorage.getItem("firstName") || "");
-      stored.set("last_name", localStorage.getItem("lastName") || "");
-      stored.set("email", localStorage.getItem("email") || "");
-      stored.set("phone", localStorage.getItem("phone") || "");
-
-      // =========================================
-      // META / FACEBOOK TRACKING FIELDS
-      // =========================================
-      [
-        "fbclid",
-        "fbc",
-        "fbp",
-        "utm_source",
-        "utm_campaign",
-        "utm_term",
-        "utm_device",
-        "utm_adgroup"
-      ].forEach(function (p) {
-        const value = localStorage.getItem(p);
-        if (value) {
-          stored.set(p, value);
-        }
-      });
-
-      stored.set("lead_source", "Facebook");
-
-      const iframe = document.createElement("iframe");
-      iframe.src =
-        "https://links.summitflowcrm.com/widget/form/dNKGsbO90msgBMgJWxKQ?" +
-        stored.toString();
-
-      iframe.style.width = "100%";
-      iframe.style.height = "1305px";
-      iframe.style.border = "none";
-      iframe.style.borderRadius = "3px";
-      iframe.id = "inline-dNKGsbO90msgBMgJWxKQ";
-      iframe.setAttribute("data-layout", "{'id':'INLINE'}");
-      iframe.setAttribute("data-trigger-type", "alwaysShow");
-      iframe.setAttribute("data-trigger-value", "");
-      iframe.setAttribute("data-activation-type", "alwaysActivated");
-      iframe.setAttribute("data-activation-value", "");
-      iframe.setAttribute("data-deactivation-type", "neverDeactivate");
-      iframe.setAttribute("data-deactivation-value", "");
-      iframe.setAttribute("data-form-name", "PPC / Website 2");
-      iframe.setAttribute("data-height", "1305");
-      iframe.setAttribute("data-layout-iframe-id", "inline-dNKGsbO90msgBMgJWxKQ");
-      iframe.setAttribute("data-form-id", "dNKGsbO90msgBMgJWxKQ");
-      iframe.setAttribute("title", "PPC / Website 2");
-
-      document.getElementById("ghl-form-ppc2").appendChild(iframe);
-    })();
-    </script>
-
-    <!-- =========================
-    TRUST CHECK SECTION
-    ========================== -->
-    <div class="trust-checks">
-      <div><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg><span>We will not share your information or send SPAM</span></div>
-      <div><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>We use your phone and email for further contact and verification</span></div>
+    <div class="trust-checks compact-trust-checks">
+      <div><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg><span>We will not share your information or send spam</span></div>
+      <div><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>We use your phone and email for contact and verification</span></div>
       <div class="warning-text"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg><span>If you enter an incorrect number, we cannot send an offer</span></div>
     </div>
 
@@ -185,21 +137,7 @@ OFFER COMPLETION SECTION
   </div>
 </footer>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  const params = new URLSearchParams(window.location.search);
-  const address = params.get("address");
-
-  if (address) {
-    const decoded = decodeURIComponent(address);
-    document.getElementById("addressField").value = decoded;
-    document.getElementById("displayAddress").textContent = decoded;
-  }
-</script>
-
-<script src="https://links.summitflowcrm.com/js/form_embed.js"></script>
-<script src="/script.js"></script>
-
+<script src="/script.js?v=20261101b"></script>
+<script>(function(){var y=document.getElementById("year");if(y&&!y.textContent)y.textContent=new Date().getFullYear();})();</script>
 </body>
 </html>

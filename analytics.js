@@ -23,9 +23,8 @@ var TBR_ANALYTICS = {
   var cfg = TBR_ANALYTICS;
   var unset = function (v) { return !v || v.indexOf("REPLACE_WITH") === 0; };
 
-  /* Lead conversion. The CRM form is a cross-origin iframe, so this page
-     can't see the submit itself — but GoHighLevel redirects to /thank-you/
-     after a successful submission, so reaching that page IS the lead.
+  /* Lead conversion. The step-3 form sends the lead to the CRM and then
+     redirects to /thank-you/, so reaching that page IS the lead.
      Counted once per browser session so a refresh doesn't double-count. */
   var isLead = (function () {
     if (!/^\/thank-you\/?$/.test(location.pathname)) return false;

@@ -145,6 +145,8 @@ function sendLeadToCRM(lead) {
       page_url: location.href,
       submitted_at: new Date().toISOString()
     }, lead);
+    // Digits only, as in the test lead the CRM accepted.
+    if (payload.phone) payload.phone = String(payload.phone).replace(/\D/g, "");
     // Drop blanks so the CRM never overwrites a field with an empty value.
     Object.keys(payload).forEach(function (k) {
       if (payload[k] === "" || payload[k] == null) delete payload[k];
@@ -153,8 +155,10 @@ function sendLeadToCRM(lead) {
       method: "POST",
       mode: "no-cors",
       keepalive: true,
-      // URLSearchParams sets Content-Type: application/x-www-form-urlencoded.
-      body: new URLSearchParams(payload)
+      // Explicit header with no "; charset" suffix, matching the test lead the
+      // CRM accepted (browsers append one to a URLSearchParams body).
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(payload).toString()
     }).catch(function () {});
   } catch (e) {}
 }
@@ -176,11 +180,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const email = document.getElementById("email")?.value.trim() || "";
     const phone = document.getElementById("phone")?.value.trim() || "";
 
-    const address = localStorage.getItem("address") || "";
-    const city = localStorage.getItem("addressCity") || "";
-    const state = localStorage.getItem("addressState") || "";
-    const postal = localStorage.getItem("addressPostal") || "";
-    const country = localStorage.getItem("addressCountry") || "";
+    // Normally saved by step 1. Fall back to the URL (e.g. when step 3 sent the
+    // visitor back here) and save it, so step 3 has it too.
+    const qs = new URLSearchParams(window.location.search);
+    const pick = function (key, param) {
+      const v = localStorage.getItem(key) || (qs.get(param) || "").trim();
+      if (v) localStorage.setItem(key, v);
+      return v;
+    };
+    const address = pick("address", "address");
+    const street = pick("addressStreet", "street");
+    const city = pick("addressCity", "city");
+    const state = pick("addressState", "state");
+    const postal = pick("addressPostal", "postal_code");
+    const country = pick("addressCountry", "country");
 
     localStorage.setItem("firstName", firstName);
     localStorage.setItem("lastName", lastName);
@@ -189,21 +202,104 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const params = new URLSearchParams(window.location.search);
     params.set("address", address);
+    params.set("street", street);
     params.set("city", city);
     params.set("state", state);
     params.set("postal_code", postal);
     params.set("country", country);
-    params.set("first_name", firstName);
-    params.set("last_name", lastName);
-    params.set("email", email);
-    params.set("phone", phone);
 
-    // Step 2 is where a lead has full contact details and has given SMS
-    // consent, so it's captured here even if they never finish step 3.
+    // The lead is sent to the CRM from step 3, together with the step-3
+    // answers; remember the SMS consent given here so it goes with it.
     const consentEl = document.getElementById("consentCheckbox");
     const consentText = consentEl && consentEl.closest("label")
       ? consentEl.closest("label").textContent.replace(/\s+/g, " ").trim()
       : "";
+    localStorage.setItem("smsConsent", consentEl && consentEl.checked ? "true" : "false");
+    localStorage.setItem("smsConsentText", consentText);
+
+    window.location.href = "/get-your-offer-send/?" + params.toString();
+  });
+});
+
+/* ===============================
+DETAILS FORM SUBMIT
+/get-your-offer-send/ -> /thank-you/
+Sends the complete lead (steps 1-3) to the CRM.
+================================ */
+
+document.addEventListener("DOMContentLoaded", function () {
+  const detailsForm = document.getElementById("detailsForm");
+  if (!detailsForm) return;
+
+  const email = localStorage.getItem("email") || "";
+  const phone = localStorage.getItem("phone") || "";
+
+  // Contact details come from step 2. Without them there's no lead to send,
+  // so send the visitor back to fill them in.
+  if (!email && !phone) {
+    window.location.replace("/get-your-offer/" + window.location.search);
+    return;
+  }
+
+  // Everything from steps 1-2 is read once, now: the site's other pages clear
+  // the saved address when opened, so leaving this page and coming Back must
+  // not lose or mix up parts of it. The address and its parts come from one
+  // source (saved by step 1, or else the URL step 2 built) for the same reason.
+  const qs = new URLSearchParams(window.location.search);
+  const fromStorage = !!localStorage.getItem("address");
+  const part = function (key, param) {
+    return (fromStorage ? localStorage.getItem(key) : qs.get(param)) || "";
+  };
+  const address = part("address", "address").trim();
+  const street = part("addressStreet", "street");
+  const city = part("addressCity", "city");
+  const state = part("addressState", "state");
+  const postal = part("addressPostal", "postal_code");
+  const country = part("addressCountry", "country");
+  const firstName = localStorage.getItem("firstName") || "";
+  const lastName = localStorage.getItem("lastName") || "";
+  const smsConsent = localStorage.getItem("smsConsent");
+  const smsConsentText = localStorage.getItem("smsConsentText") || "";
+  const tracking = {};
+  ["fbclid", "fbc", "fbp", "utm_source", "utm_medium", "utm_campaign_name",
+   "utm_campaign", "utm_adgroup", "utm_ad", "utm_term", "utm_device"].forEach(function (k) {
+    const v = localStorage.getItem(k);
+    if (v) tracking[k] = v;
+  });
+
+  const displayAddress = document.getElementById("displayAddress");
+  if (displayAddress) displayAddress.textContent = address || "your property";
+
+  const submitBtn = detailsForm.querySelector('button[type="submit"]');
+  const submitLabel = submitBtn ? submitBtn.textContent : "";
+
+  // Coming Back from /thank-you/ can restore this page as it was left, with
+  // the button still disabled.
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted && submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitLabel;
+    }
+  });
+
+  detailsForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Only bots fill in the hidden spam-trap field.
+    if (detailsForm.elements._gotcha && detailsForm.elements._gotcha.value) {
+      window.location.href = "/thank-you/";
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+    }
+
+    const reason = document.getElementById("reasonForSelling")?.value || "";
+    const askingPrice = document.getElementById("askingPrice")?.value.trim() || "";
+    const listed = document.getElementById("listedWithRealtor")?.value || "";
+
     const crmLead = {
       brand: "Three Brothers Realty",
       lead_source: "Facebook",
@@ -214,23 +310,24 @@ document.addEventListener("DOMContentLoaded", function () {
       email: email,
       phone: phone,
       address: address,
-      street: localStorage.getItem("addressStreet") || "",
+      street: street,
       city: city,
       state: state,
       postal_code: postal,
       country: country,
-      sms_consent: !!(consentEl && consentEl.checked),
+      reason_for_selling: reason,
+      asking_price: askingPrice,
+      listed_with_realtor: listed,
       consent_method: "checkbox",
-      sms_consent_text: consentText
+      sms_consent_text: smsConsentText
     };
-    ["fbclid", "fbc", "fbp", "utm_source", "utm_medium", "utm_campaign_name",
-     "utm_campaign", "utm_adgroup", "utm_ad", "utm_term", "utm_device"].forEach(function (k) {
-      const v = localStorage.getItem(k);
-      if (v) crmLead[k] = v;
-    });
-    // Send once per lead per session: a double-tap on Continue, or Back then
-    // Continue, would otherwise create a duplicate lead in the CRM.
-    const crmSig = [email, phone, address].join("|").toLowerCase();
+    // Consent was given (a required checkbox) on step 2.
+    if (smsConsent) crmLead.sms_consent = smsConsent === "true";
+    Object.assign(crmLead, tracking);
+
+    // Send once per lead per session: Back then submitting the same answers
+    // again would otherwise create a duplicate lead in the CRM.
+    const crmSig = [email, phone, address, reason, askingPrice, listed].join("|").toLowerCase();
     let alreadySent = false;
     try {
       alreadySent = sessionStorage.getItem("crm_lead_sent") === crmSig;
@@ -238,7 +335,8 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (e) {}
     if (!alreadySent) sendLeadToCRM(crmLead);
 
-    window.location.href = "/get-your-offer-send/?" + params.toString();
+    // /thank-you/ is where the Lead conversion is counted (analytics.js).
+    window.location.href = "/thank-you/";
   });
 });
 

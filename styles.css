@@ -572,7 +572,6 @@ button{font-family:inherit}
   padding:44px 48px 40px;background:var(--white);
   border-radius:var(--r-lg);box-shadow:var(--shadow-lg);
 }
-.offer-step-wrap.wide{max-width:860px}
 .step-progress{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:32px}
 .step-progress span{height:6px;border-radius:6px;background:#E9E5DD}
 .step-progress span.on{background:var(--gold)}
@@ -581,25 +580,15 @@ button{font-family:inherit}
   font-size:clamp(30px,3.4vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.12;color:var(--navy-900);
   margin:0 0 14px;
 }
-.offer-step-subtitle,.lead-text{font-size:18px;line-height:1.6;color:var(--body);margin:0 0 28px}
+.offer-step-subtitle{font-size:18px;line-height:1.6;color:var(--body);margin:0 0 28px}
 .address-inline{font-weight:700;color:var(--navy-900)}
-.address-highlight{
-  display:flex;align-items:center;gap:12px;
-  margin:0 0 32px;padding:16px 20px;
-  font-size:18px;font-weight:700;letter-spacing:-.01em;color:var(--navy-900);
-  background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
-}
-.address-highlight:empty{display:none}
-.address-highlight::before{
-  content:"";width:40px;height:40px;flex:0 0 auto;border-radius:50%;
-  background:var(--gold-100) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23AE8A45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") center/20px no-repeat;
-}
 
 .offer-contact-form{display:flex;flex-direction:column;gap:14px}
 .offer-two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .offer-contact-form input[type="text"],
 .offer-contact-form input[type="email"],
-.offer-contact-form input[type="tel"]{
+.offer-contact-form input[type="tel"],
+.offer-contact-form select{
   width:100%;height:58px;padding:0 18px;
   font-family:var(--sans);font-size:17px;color:var(--ink);
   background:var(--white);border:1.5px solid var(--field);border-radius:var(--r-sm);
@@ -607,8 +596,17 @@ button{font-family:inherit}
   -webkit-appearance:none;appearance:none;
 }
 .offer-contact-form input::placeholder{color:var(--muted);opacity:1}
-.offer-contact-form input:hover{border-color:var(--muted)}
-.offer-contact-form input:not([type=checkbox]):focus{outline:0;border-color:var(--navy-900);box-shadow:0 0 0 4px rgba(194,160,92,.35)}
+.offer-contact-form input:hover,.offer-contact-form select:hover{border-color:var(--muted)}
+.offer-contact-form input:not([type=checkbox]):focus,.offer-contact-form select:focus{outline:0;border-color:var(--navy-900);box-shadow:0 0 0 4px rgba(194,160,92,.35)}
+.offer-contact-form select{
+  padding-right:48px;cursor:pointer;text-overflow:ellipsis;
+  background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B6B7B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") right 16px center/20px no-repeat;
+}
+/* Unanswered dropdowns read like the other fields' placeholders */
+.offer-contact-form select:has(option[value=""]:checked){color:var(--muted)}
+.offer-contact-form select option{color:var(--ink)}
+.offer-field{display:flex;flex-direction:column;gap:7px}
+.offer-field-hint{margin:0;padding-left:4px;font-size:13.5px;line-height:1.4;color:var(--muted)}
 .offer-consent{
   display:flex;gap:14px;align-items:flex-start;cursor:pointer;
   margin-top:4px;padding:16px 18px;
@@ -617,6 +615,8 @@ button{font-family:inherit}
 .offer-consent input{width:22px;height:22px;margin:1px 0 0;flex:0 0 auto;accent-color:var(--navy-900);cursor:pointer}
 .offer-consent input:focus-visible{outline:3px solid var(--navy-900);outline-offset:2px;box-shadow:none}
 .offer-consent span{font-size:13px;line-height:1.6;color:#4A5968}
+.offer-legal{margin-bottom:0;cursor:default}
+.offer-legal a{color:var(--navy-900);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 .offer-submit-btn{width:100%;height:58px;margin-top:6px;font-size:17px}
 
 .trust-checks{
@@ -633,33 +633,7 @@ button{font-family:inherit}
   color:var(--danger);font-weight:600;
 }
 .trust-checks .warning-text .i{width:20px;height:20px;margin-top:0;color:var(--danger);stroke-width:2.2}
-.form-embed{position:relative;margin:0;border-radius:var(--r);overflow:hidden}
-.form-embed iframe{display:block}
-/* GHL keeps the iframe hidden until its widget has loaded:
-   hold the space with a skeleton of the form so it reads as "arriving", not broken */
-@keyframes spin{to{transform:rotate(360deg)}}
-.form-embed:empty,
-.form-embed:has(iframe[style*="visibility: hidden"]){
-  min-height:720px;margin:0 0 8px;
-  border:1px solid var(--line);
-  background:
-    linear-gradient(#E6E1D8,#E6E1D8) 28px 36px / 28% 12px no-repeat,
-    linear-gradient(var(--white),var(--white)) 28px 60px / calc(100% - 56px) 54px no-repeat,
-    linear-gradient(#E6E1D8,#E6E1D8) 28px 142px / 38% 12px no-repeat,
-    linear-gradient(var(--white),var(--white)) 28px 166px / calc(100% - 56px) 54px no-repeat,
-    linear-gradient(#E6E1D8,#E6E1D8) 28px 248px / 32% 12px no-repeat,
-    linear-gradient(var(--white),var(--white)) 28px 272px / calc(100% - 56px) 54px no-repeat,
-    var(--paper);
-}
-.form-embed:empty::after,
-.form-embed:has(iframe[style*="visibility: hidden"])::after{
-  content:"";position:absolute;left:50%;bottom:40px;width:28px;height:28px;margin-left:-14px;
-  border-radius:50%;border:2.5px solid rgba(194,160,92,.25);border-top-color:var(--gold-600);
-  animation:spin .9s linear infinite;
-  pointer-events:none; /* never intercept taps meant for the CRM form */
-}
-
-/* Step 2 on desktop: copy on the navy photo band (left), form card (right) */
+/* Steps 2 & 3 on desktop: copy on the navy photo band (left), form card (right) */
 @media (min-width:900px){
   .step-contact{
     position:relative;isolation:isolate;padding:0;
@@ -877,16 +851,16 @@ button{font-family:inherit}
   .offer-step-wrap{padding:26px 20px 24px;border-radius:18px}
   .step-progress{margin-bottom:22px}
   .offer-step-title,.offer-step-wrap h1{font-size:28px}
-  .offer-step-subtitle,.lead-text{font-size:16.5px;margin-bottom:22px}
+  .offer-step-subtitle{font-size:16.5px;margin-bottom:22px}
   .offer-two-col{gap:10px}
   .offer-contact-form{gap:12px}
   .offer-contact-form input[type="text"],
   .offer-contact-form input[type="email"],
-  .offer-contact-form input[type="tel"]{height:54px;padding:0 14px;font-size:16px}
+  .offer-contact-form input[type="tel"],
+  .offer-contact-form select{height:54px;padding:0 14px;font-size:16px}
+  .offer-contact-form select{padding-right:44px;background-position:right 14px center}
   .offer-consent{padding:14px;gap:12px}
   .offer-consent span{font-size:13.5px;line-height:1.55}
-  .address-highlight{font-size:16px;padding:12px 14px;margin-bottom:22px}
-  .form-embed:empty,.form-embed:has(iframe[style*="visibility: hidden"]){min-height:860px}
 }
 
 @media (max-width:767px){
